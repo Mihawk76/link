@@ -6,7 +6,7 @@ int  res_sensor (char* location,int R,int S,int T, int nilai,int device,int jam,
    char scoreData[128];
    snprintf(scoreData, sizeof scoreData, "location=%s",location);
 	{
-		snprintf(scoreData, sizeof scoreData, "R=%d,&S=%d,&T=%d,&device=%d,&nilai=%d,&time=%d:%d:%d:",R,S,T,device,nilai,jam,ment,det);
+		snprintf(scoreData, sizeof scoreData, "R=%d&S=%d&T=%d&device=%d&nilai=%d&time=%d:%d:%d:",R,S,T,device,nilai,jam,ment,det);
 		  CURL *curl;
 		  CURLcode res; 
 		  curl_global_init(CURL_GLOBAL_ALL);
