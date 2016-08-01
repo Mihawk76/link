@@ -1,0 +1,94 @@
+                 
+                       POST DATA MENGGUNAKAN CURL                             
+
+A. Post Data ke databases mysql dari bahasa c dengan menggunakan curl 
+
+langkah-langkah membuat perogram Post Data dari curl di bahasa c berikut :
+1.    Membuat databases dan table di mysql.
+2. membuat script/file php di dictory /var/www//html/ dengan file insert_suhu.php,  insert_kelembaban.php dan insert_kwh.php.
+3. setelah selesai di buat maka hasilnya seperti dibawah untuk menjalankan perogramnya.
+
+1.  Dokumentasi proses library  pada fungsi yang di buat .
+
+# include <stdio.h> dan # include <curl/curl.h> adalah berisi definisi fungsi2 dan konstanta dari compiler bahasa c.
+#include "res_sensor.c"   adalah berisi definisi fungsi-fungsi dan konstanta yang di buat.
+
+listing program fungsi main_program.c untuk mengirim data ke databases
+ 
+#include<stdio.h>
+#include <curl/curl.h>
+#include "res_sensor.c"
+int main()
+{
+	res_sensor("http://localhost/lb/insert_suhu.php",0, 0, 0, 45, 56, 12, 20, 11)
+	return 0;
+{
+       
+penjelasan listing program di atas adalah :
+  
+listing code di bawah ini adalah kegunanya untuk mengeksekusi fungsi suhu yang dibuat.
+
+di dalam fungsi : res_sensor("http://localhost/lb/insert_suhu.php",0, 0, 0, 45, 56, 12, 20, 11);
+
+di dalam library : int  res_sensor(char* location,  int nilai, int device, int jam, int ment, int det)
+
+penjelasan ( char* location :"http://localhost/lb/insert_suhu.php", nilai :45 ,deviace:56,  jam:12, menit:20,  det :11) untuk pengisian parameter yang di buat di program utama.
+Catatan :
+untuk  menjalankan program  harus mengisi parameter 8 di fungsi. karena  di library di buat  deklaris variabel 8 parameter .
+
+listing code di bawah ini adalah kegunanya untuk mengeksekusi fungsi kelembaban .
+di dalam fungsi : res_sensor("http://localhost/lb/insert_kelembaban.php",0, 0, 0, 67, 56, 97, 10, 30);
+ di dalam library :int  res_sensor(char* location, int nilai, int device, int jam, int ment, int det)
+ penjelasan (char* location :"http://localhost/lb/insert_kelembaban.php ,nilai:67,  device:56 
+jam:97, menit:10,  det:30) untuk pengisian parameter yang di buat pada program pertama.
+Catatan :
+Untuk menjalankan program harus mengisi parameternya 8 di fungsi.  karena  di library  8 parameter .
+
+listing code di bawah ini adalah kegunanya untuk mengeksekusi fungsi KWH .
+di dalam fungsi : res_sensor("http://localhost/lb/insert_kwh.php",0, 0, 0, 67, 56, 97, 10, 30);
+di dalam library :  int  res_sensor(char* location, int R, int S, int T, int device, int jam, int ment, int det)
+penjelasan (char* location :"http://localhost/lb/insert_kwh.php  R : 67, S : 56 ,T : 67, divece : 56 , jam : 97 , menit : 10,det : 30) untuk pengisian parameter yang di buat pada program pertama.
+
+
+Langkah-langkah untuk menjalankan program :
+
+1. masuk ke terminal untuk compile dengan listing code di bawah ini :
+
+gcc main_program.c $(pkg-config --libs --cflags libcurl)-o main_program
+
+./main_program
+
+ maka hasil compile diatas adalah seperti di bawah ini :
+
+ 
+ketika masukan suhu ke dalam program library  maka insert_suhu.php dan fungsi yang dibuat di suhu akan di eksekusi oleh library, hasil  eksekusi  dari library yang di buat bisa langsung di cek di mysql di bawah ini hasilnya :
+
+
+
+
+
+
+
+2. untuk memasukan fungsi yang lain hanya mengganti listing program cetak tebal di bawah ini :
+
+res_sensor("http://localhost/lb/insert_suhu.php",0, 0, 0, 45, 56, 12, 20, 11);
+
+cara pemakaian untuk paramater suhu dan kelembaban :
+ 
+suhu :
+untuk mengeksekusi program fungsi pada suhu  harus memasukan semua parameter contoh seperti di bawah ini :
+
+res_sensor("http://localhost/lb/insert_suhu.php",0, 0, 0, 45, 56, 12, 20, 11);
+
+kelemababan :
+untuk mengeksekusi program fungsi pada kelembaban harus memasukan semua parameter contoh seperti di bawah ini :
+
+res_sensor("http://localhost/lb/insert_kelembaban.php",0, 0, 0, 45, 56, 12, 20, 11)
+
+kwh  :
+untuk mengsekusi program fungsi pada kwh  harus mengisi nilai yang  berangka kosong karena nilai berangka kosong untuk variabel (R,S,T)  contoh seperti di bawah ini :
+res_sensor("http://localhost/lb/insert_kwh.php",0, 0, 0, 45, 56, 12, 20, 11).
+Menjadi seperti di di bawah :
+res_sensor("http://localhost/lb/insert_kwh.php",70, 30, 80,  45,  56, 12, 20, 11).
+
+
